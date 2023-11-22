@@ -7,24 +7,23 @@
         <title>Show Tunes</title>
       </head>
       <body>
-        <header>
-          <h1>Show Tunes</h1>
+        <header class="is-full is-large">
+          <h1 class="title is-size-1 has-text-centered">Show Tunes</h1>
         </header>
 
         <main>
-            <aside class="tile is-parent">
-              <form>
-                <label>Search</label>
-                <input placeholder="Artist" />
-                <button>Submit</button>
-              </form>
-
-              <section>
-                <h3>Search History</h3>
-                <div class="history"></div>
-              </section>
-            </aside>
-
+          <aside class="column is-one-quarter is-parent box">
+            <form class="column is-child">
+              <label>Search</label>
+              <input type="text" class="field is-medium is-child" placeholder="Artist" />
+              <button type="submit" class="button">Submit</button>
+            </form>
+  
+            <section class="is-child">
+              <h3 class="title has-text-left is-size-3">Search History</h3>
+              <div class="history"></div>
+            </section>
+          </aside>
           <section>
             <div class="spotify">
               <h3 class="artistName"></h3>
