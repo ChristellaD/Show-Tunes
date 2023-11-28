@@ -11,27 +11,29 @@
           <h1 class="title is-size-1 has-text-centered">Show Tunes</h1>
         </header>
 
-        <main>
+        <main class="columns is-parent">
           <aside class="column is-one-quarter is-parent box">
             <form class="column is-child">
               <label>Search</label>
               <input type="text" class="field is-medium is-child" placeholder="Artist" />
-              <button type="submit" class="button" id="submitBtn">Submit</button>
+              <button type="submit" class="button submit column">Submit</button>
             </form>
   
-            <section class="is-child">
-              <h3 class="title has-text-left is-size-3">Search History</h3>
+            <section class="is-child section">
+              <h3 class="title has-text-centered is-size-3">Search History</h3>
               <div class="history"></div>
             </section>
           </aside>
-          <section>
-            <div class="card spotify">
-              <h3 class="card-header artistName"></h3>
-              <p class="card-content overview"></p>
+          <section class="is-three-quarters column is-offset-one-quarter is-medium tile is-child">
+            <div class="card is-child spotify">
+              <h3 class="card-header title artistName"></h3>
+              <p class="card column is-centered content overview"></p>
               <ul class="topSongs"></ul>
             </div>
 
-            <div class="card youtube">
+          </section>
+          <section class="tile is-parent">
+            <div class="is-child is-3 is-offset-3 youtube">
             </div>
           </section>
 
