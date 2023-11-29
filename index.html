@@ -7,11 +7,11 @@
         <title>Show Tunes</title>
       </head>
       <body>
-        <header class="is-full is-large has-background-grey-lighter">
+        <header class="is-full is-large has-background-grey-lighter p-5 is-relative">
           <h1 class="title is-size-1 has-text-centered">Show Tunes</h1>
         </header>
 
-        <main class="columns is-parent">
+        <main class="columns is-parent ml-1 mr-1">
           <aside class="column is-one-quarter is-parent mt-5 box">
             <form class="column is-child has-background-grey-lighter">
               <label class="column is-one-third is-offset-one-third title mb-1">Search</label>
@@ -24,16 +24,16 @@
               <div class="history"></div>
             </section>
           </aside>
-          <section class="is-three-quarters column is-offset-one-quarter is-medium tile is-child">
+          <section class="tile is-vertical is-three-quarters column is-offset-one-quarter is-large tile is-child">
             <div class="card is-child spotify has-background-grey-lighter mt-3">
-              <h3 class="card-header title artistName"></h3>
-              <p class="card column is-offset-one-third content overview has-background-grey-light is-one-third"></p>
-              <ul class="topSongs"></ul>
+              <h3 class="card-header title is-medium artistName"></h3>
+              <p class="tile column is-offset-one-third content has-background-grey-light is-one-third topAlbums"></p>
+              <ul class="tile column is-one-third is-offset-two-thirds content has-background-grey-light topSongs"></ul>
             </div>
 
           </section>
-          <section class="tile is-parent">
-            <div class="is-child is-3 is-offset-3 youtube">
+          <section class="tile is-vertical is-medium is-parent">
+            <div class="tile is-child is-one-third column youtube box">
             </div>
           </section>
 
