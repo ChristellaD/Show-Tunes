@@ -13,19 +13,19 @@
 
         <main class="columns is-parent">
           <aside class="column is-one-quarter is-parent mt-5 box">
-            <form class="column is-child">
-              <label>Search</label>
-              <input type="text" class="field is-medium is-child" placeholder="Artist" />
-              <button type="submit" class="button submit column">Submit</button>
+            <form class="column is-child has-background-grey-lighter">
+              <label class="column is-one-third is-offset-one-third title mb-1">Search</label>
+              <input type="text" class="input is-medium column is-three-fifths is-offset-one-fifth is-child mb-3" placeholder="Artist" />
+              <button type="submit" class="button submit is-one-third is-offset-one-third column has-text-white is-medium has-background-grey-light">Submit</button>
             </form>
   
-            <section class="is-child section">
+            <section class="is-child section has-background-grey-lighter mt-3">
               <h3 class="title has-text-centered is-size-3">Search History</h3>
               <div class="history"></div>
             </section>
           </aside>
-          <section class="is-three-quarters column is-offset-one-quarter is-medium tile is-child mt-4">
-            <div class="card is-child spotify has-background-grey-lighter">
+          <section class="is-three-quarters column is-offset-one-quarter is-medium tile is-child">
+            <div class="card is-child spotify has-background-grey-lighter mt-3">
               <h3 class="card-header title artistName"></h3>
               <p class="card column is-offset-one-third content overview has-background-grey-light is-one-third"></p>
               <ul class="topSongs"></ul>
