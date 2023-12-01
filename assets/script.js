@@ -3,30 +3,18 @@ var youtubeEl = $('.youtube');
 var submitBtn = $('#submitBtn');
 var userInput = $('#userInput');
 var artist = [];
-contHistEl = $('.history')
+var contHistEl = $('.history')
+var topAlbumEl = $('.overview')
+var topSongEl = $('.topSongs')
 
-submitBtn.on("click", function (event) {
-  event.preventDefault();
-  
-  userInput = $(this).siblings('#userInput').val();
-	if (userInput === '') {
-		return;
-	};
-
-  artist.push(userInput);
-
-	localStorage.setItem('artist', JSON.stringify(artist)); 
-
-  getYoutube();
-  getHistory();
-});
-
-getHistory();
 
 
 function getHistory() {
   var getartist = JSON.parse(localStorage.getItem('artist'));
-  
+  if (!getartist) {
+    return;
+  }
+
   $(contHistEl).empty();
  
 	for (let i = 0; i < getartist.length; i++) {
@@ -37,9 +25,8 @@ function getHistory() {
     btnEl.textContent = (getartist[i].toUpperCase());
 		contHistEl.append(rowEl);
 		rowEl.append(btnEl);
-	} if (!artist) {
-		return;
 	}
+
 
 	$('.histBtn').on("click", function (event) {
 		userInput = $(this).text();
@@ -99,68 +86,117 @@ const base64encode = (input) => {
   const hashed = sha256(codeVerifier)
   const codeChallenge = base64encode(hashed);
   
-
-const clientId = 'ed507333f63b4e30a1828dea0595685a'
-const redirectUri = 'https://christellad.github.io/Show-Tunes/';
-
-const authUrl = new URL("https://accounts.spotify.com/authorize")
-
-// generated in the previous step
-window.localStorage.setItem('code_verifier', codeVerifier);
-
-const params =  {
-  response_type: 'code',
-  client_id: clientId,
-  code_challenge_method: 'S256',
-  code_challenge: codeChallenge,
-  redirect_uri: redirectUri,
-}
-
-authUrl.search = new URLSearchParams(params).toString();
-window.location.href = authUrl.toString();
-
-const urlParams = new URLSearchParams(window.location.search);
-let code = urlParams.get('code');
-
-const getToken = async code => {
-
-  // stored in the previous step
-  let codeVerifier = localStorage.getItem('code_verifier');
-
-  const payload = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application   /x-www-form-urlencoded',
-    },
-    body: new URLSearchParams({
-      client_id: clientId,
-      grant_type: 'authorization_code',
-      code,
-      redirect_uri: redirectUri,
-      code_verifier: codeVerifier,
-    }),
-  }
-
-  const body = await fetch(url, payload);
-  const response =await body.json();
-
-  localStorage.setItem('access_token', response.access_token);
   
-}
+  function testSpotify() {
 
-  let accessToken = localStorage.getItem('access_token');
-  var spotifyUrl = 'https://api.spotify.com/v1/search/?query=' + userInput + '&type=album&locale=en-US%2Cen%3Bq%3D0.9&offset=0&limit=5'
-  fetch(spotifyUrl, {
-    headers: {
-      Authorization: 'Bearer ' + accessToken
-    }
-  })
-    .then(function (response) {
-        return response.json();
-      })
-      .then(function (data){
-        console.log(data)
+    const clientId = "ed507333f63b4e30a1828dea0595685a";
+    const clientSecret = "15662e91b9ae4f658b35ab168e4b344e";
+  
+    fetch("https://accounts.spotify.com/api/token", {
+      body:
+        "grant_type=client_credentials&client_id=" +
+        clientId +
+        "&client_secret=" +
+        clientSecret,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        getAlbum(data.access_token);
+        getSongs(data.access_token);
       });
+  
+   //Function that gets the top albums and makes them into elements   
+    function getAlbum(token) {
+      topAlbumEl.empty()
+
+      var spotifyUrl =
+        "https://api.spotify.com/v1/search/?query=" +
+        userInput +
+        "&type=album&locale=en-US%2Cen%3Bq%3D0.9&offset=0&limit=3";
+        console.log(spotifyUrl)
+      fetch(spotifyUrl, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          console.log(data);
+          for (let i = 0; i < data.albums.items.length; i++){
+            var albums = data.albums.items[i].images[2].url;
+            var albumEl = document.createElement('a');
+            albumEl.setAttribute('href', data.albums.items[i].external_urls.spotify)
+            var album = document.createElement('img');
+            album.setAttribute('src', albums);   
+            var title = document.createElement('h3');
+            title.textContent = (data.albums.items[i].name)
+
+            topAlbumEl.append(albumEl);
+            albumEl.append(album);
+            albumEl.append(title);
+          };
+        });
+      }
+
+      //Function that gets the top songs and makes them into elements
+        function getSongs(token) {
+          topSongEl.empty()
+          var spotifyUrl =
+            "https://api.spotify.com/v1/search/?query=" +
+            userInput +
+            "&type=track&locale=en-US%2Cen%3Bq%3D0.9&offset=0&limit=3";
+          fetch(spotifyUrl, {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          })
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (data) {
+              console.log(data);
+              for (let i = 0; i < data.tracks.items.length; i++){
+                var tracks = data.tracks.items[i].album.images[2].url;
+                var tracksEl = document.createElement('a');
+                tracksEl.setAttribute('href', data.tracks.items[i].album.external_urls.spotify)
+                var album = document.createElement('img');
+                album.setAttribute('src', tracks);   
+                var title = document.createElement('h3');
+                title.textContent = (data.tracks.items[i].name)
+    
+                topSongEl.append(tracksEl);
+                tracksEl.append(album);
+                tracksEl.append(title);
+              };
+            });
+    
+    }
+  }
+  testSpotify();
 }
 
-getSpotify()
+
+submitBtn.on("click", function (event) {
+  event.preventDefault();
+  
+  userInput = $(this).siblings('#userInput').val();
+	if (userInput === '') {
+		return;
+	};
+
+  artist.push(userInput);
+
+	localStorage.setItem('artist', JSON.stringify(artist)); 
+
+  getYoutube();
+  getHistory();
+  getSpotify();
+});
+
+getHistory();
