@@ -27,11 +27,13 @@
           <section class="tile is-vertical is-three-quarters column is-offset-one-quarter is-large is-child">
             <div class="card is-child spotify has-background-info-light mt-3">
               <h3 class="card-header has-text-centered is-justify-content-center title is-medium artistName"></h3>
-              <p class="tile column is-child has-background-grey-light topAlbums"></p>
-              <ul class="tile p-2 column has-text-centered is-child content has-background-grey-light topSongs"></ul>
+              <div class="columns is-parent ml-0 mr-0 tile">
+                <p class="tile column box is-half is-child has-background-grey-light has-text-centered content topAlbums"></p>
+                <ul class="tile column box is-half is-offset-half has-text-centered is-child content has-background-grey-light topSongs"></ul>
+              </div>
             </div>
-            <div class="tile is-vertical is-large column has-background-info-light is-parent">
-              <div class="tile is-child column has-background-grey-light youtube">
+            <div class="tile mt-2 mr-0 is-large columns has-background-info-light is-parent ml-0 mt-5">
+              <div class="tile is-child column has-background-grey-light box is-flex is-flex-direction-row youtube">
               </div>
             </div>
           </section>
