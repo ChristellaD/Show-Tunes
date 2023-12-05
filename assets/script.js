@@ -22,9 +22,8 @@ function getHistory() {
 
 		var rowEl = document.createElement('div');
 		var btnEl = document.createElement('button');
-    btnEl.classList = 'histBtn';
+    btnEl.classList = 'histBtn button';
     btnEl.textContent = (getartist[i].toUpperCase());
-    btnEl.classList = ('button')
 		contHistEl.append(rowEl);
 		rowEl.append(btnEl);
 	}
