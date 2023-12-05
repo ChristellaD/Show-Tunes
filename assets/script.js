@@ -23,6 +23,7 @@ function getHistory() {
 		var btnEl = document.createElement('button');
     btnEl.classList = 'histBtn';
     btnEl.textContent = (getartist[i].toUpperCase());
+    btnEl.classList = ('button')
 		contHistEl.append(rowEl);
 		rowEl.append(btnEl);
 	}
