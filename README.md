@@ -1,5 +1,7 @@
 # Show-Tunes
 
+https://christellad.github.io/Show-Tunes/
+
 ### Description
 Welcome to our project! We are thrilled to showcase a music discovery app that allows users to search for and find music and information about their favorite artists. This music search page was built using Bulma framework.
 
@@ -25,6 +27,7 @@ The final code deployed can be found at https://christellad.github.io/Show-Tunes
 ## Resources
 * https://developer.spotify.com/documentation/web-api
 * https://developers.google.com/youtube/v3/docs
+* https://bulma.io/documentation/
 
 
 ## Credits
