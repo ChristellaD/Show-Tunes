@@ -8,7 +8,7 @@ var topAlbumEl = $('.overview')
 var topSongEl = $('.topSongs')
 
 
-
+//Pulls the history in the local storage and makes them into clickable buttons
 function getHistory() {
   var getartist = JSON.parse(localStorage.getItem('artist'));
   if (!getartist) {
@@ -31,19 +31,24 @@ function getHistory() {
 	$('.histBtn').on("click", function (event) {
 		userInput = $(this).text();
     getYoutube();
+    getSpotify()
 	});
 };
 
+//Creates elements and pulls information from the youtube api to be displayed
 function getYoutube() {
-youtubeEl.empty()
+youtubeEl.empty() 
+
+var heading = document.createElement('h1');
+heading.textContent = ('Top Youtube Searches: ');
+youtubeEl.append(heading);
+
     var youtubeUrl = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&q='+ userInput +'&type=video&key=AIzaSyA174a2gY04tvmL5EB1EP4iGnyHr4mVkOg'
-    console.log(youtubeUrl)
     fetch(youtubeUrl)
     .then(function (response) {
         return response.json();
       })
       .then(function (data){
-        console.log(data)
         for (let i = 0; i < data.items.length; i++){
             var thumbnails = data.items[i].snippet.thumbnails.medium.url;
             var thumbnailEl = document.createElement('a');
@@ -61,7 +66,7 @@ youtubeEl.empty()
 }
 
 function getSpotify() {
-
+//Generates and encrypts the token 
   const generateRandomString = (length) => {
     const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const values = crypto.getRandomValues(new Uint8Array(length));
@@ -88,7 +93,7 @@ const base64encode = (input) => {
   
   
   function testSpotify() {
-
+    //Uses the client id to gather an access token 
     const clientId = "ed507333f63b4e30a1828dea0595685a";
     const clientSecret = "15662e91b9ae4f658b35ab168e4b344e";
   
@@ -112,12 +117,16 @@ const base64encode = (input) => {
    //Function that gets the top albums and makes them into elements   
     function getAlbum(token) {
       topAlbumEl.empty()
+      
+      var heading = document.createElement('h1');
+      heading.textContent = ('Top 3 Albums: ');
+      topAlbumEl.append(heading);
 
       var spotifyUrl =
         "https://api.spotify.com/v1/search/?query=" +
         userInput +
         "&type=album&locale=en-US%2Cen%3Bq%3D0.9&offset=0&limit=3";
-        console.log(spotifyUrl)
+
       fetch(spotifyUrl, {
         headers: {
           Authorization: "Bearer " + token,
@@ -127,7 +136,6 @@ const base64encode = (input) => {
           return response.json();
         })
         .then(function (data) {
-          console.log(data);
           for (let i = 0; i < data.albums.items.length; i++){
             var albums = data.albums.items[i].images[2].url;
             var albumEl = document.createElement('a');
@@ -147,6 +155,11 @@ const base64encode = (input) => {
       //Function that gets the top songs and makes them into elements
         function getSongs(token) {
           topSongEl.empty()
+
+          var heading = document.createElement('h1');
+          heading.textContent = ('Top 3 Songs: ');
+          topSongEl.append(heading);
+
           var spotifyUrl =
             "https://api.spotify.com/v1/search/?query=" +
             userInput +
@@ -160,7 +173,6 @@ const base64encode = (input) => {
               return response.json();
             })
             .then(function (data) {
-              console.log(data);
               for (let i = 0; i < data.tracks.items.length; i++){
                 var tracks = data.tracks.items[i].album.images[2].url;
                 var tracksEl = document.createElement('a');
@@ -181,7 +193,7 @@ const base64encode = (input) => {
   testSpotify();
 }
 
-
+//Adds a click ability to the submit button to search
 submitBtn.on("click", function (event) {
   event.preventDefault();
   
@@ -191,12 +203,12 @@ submitBtn.on("click", function (event) {
 	};
 
   artist.push(userInput);
-
+//Stores the History to local storage
 	localStorage.setItem('artist', JSON.stringify(artist)); 
 
   getYoutube();
   getHistory();
   getSpotify();
 });
-
+//Keeps the history shown after refresh
 getHistory();
