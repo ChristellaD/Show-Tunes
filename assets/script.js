@@ -3,9 +3,10 @@ var youtubeEl = $('.youtube');
 var submitBtn = $('#submitBtn');
 var userInput = $('#userInput');
 var artist = [];
-var contHistEl = $('.history')
-var topAlbumEl = $('.overview')
-var topSongEl = $('.topSongs')
+var contHistEl = $('.history');
+var topAlbumEl = $('.topAlbums');
+var topSongEl = $('.topSongs');
+var artistEl = $('.artistName');
 
 
 //Pulls the history in the local storage and makes them into clickable buttons
@@ -52,7 +53,7 @@ youtubeEl.append(heading);
         for (let i = 0; i < data.items.length; i++){
             var thumbnails = data.items[i].snippet.thumbnails.medium.url;
             var thumbnailEl = document.createElement('a');
-            thumbnailEl.setAttribute('href', 'https://www.youtube.com/watch?v='+ data.items[i].id.videoId)
+            thumbnailEl.setAttribute('href', 'https://www.youtube.com/watch?v='+ data.items[i].id.videoId);
             var thumbnail = document.createElement('img');
             thumbnail.setAttribute('src', thumbnails);   
             var title = document.createElement('h3');
@@ -112,8 +113,35 @@ const base64encode = (input) => {
       .then((data) => {
         getAlbum(data.access_token);
         getSongs(data.access_token);
+        getName(data.access_token);
       });
   
+      function getName(token) {
+        artistEl.empty()
+
+        var spotifyUrl =
+          "https://api.spotify.com/v1/search/?query=" +
+          userInput +
+          "&type=track&locale=en-US%2Cen%3Bq%3D0.9&offset=0&limit=3";
+  
+        fetch(spotifyUrl, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            console.log(data)
+            var nameEl = document.createElement('h3');
+            nameEl.textContent = (data.tracks.items[0].artists[0].name);
+            artistEl.append(nameEl);
+            console.log(nameEl)
+          });
+
+      }
+
    //Function that gets the top albums and makes them into elements   
     function getAlbum(token) {
       topAlbumEl.empty()
