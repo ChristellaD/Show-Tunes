@@ -7,23 +7,28 @@
         <title>Show Tunes</title>
       </head>
       <body>
+        <!-- Header Section -->
         <header class="is-full is-large has-background-grey-lighter p-5 is-relative">
           <h1 class="title is-size-1 has-text-centered">Show Tunes</h1>
         </header>
 
+        <!-- Main Section -->
         <main class="columns is-ancestor ml-1 mr-1">
+          <!-- Search side bar section -->
           <aside class="column is-one-quarter is-parent mt-5 box">
+            <!-- Search Form -->
             <form class="column is-child has-background-grey-lighter">
               <label class="column is-one-third is-offset-one-third is-size-3 is-size-2-desktop mb-1">Search</label>
               <input type="text" id="userInput" class="input column is-three-fifths is-normal is-offset-one-fifth is-child mb-3" placeholder="Artist" />
               <button type="submit" id="submitBtn" class="button submit is-one-third is-offset-one-third column has-text-white is-normal has-background-grey-light">Submit</button>
             </form>
-  
+            <!-- Search History Section -->
             <section class="is-child section has-background-grey-lighter mt-3">
               <h3 class="title has-text-centered is-size-3">Search History</h3>
               <div class="history has-text-centered content"></div>
             </section>
           </aside>
+          <!-- Spotify Section -->
           <section class="tile is-vertical is-three-quarters column is-offset-one-quarter is-large is-child">
             <div class="card is-child spotify has-background-info-light mt-3">
               <h3 class="card-header has-text-centered is-justify-content-center title is-medium artistName"></h3>
@@ -32,6 +37,7 @@
                 <ul class="tile column box is-half is-offset-half has-text-centered is-child content has-background-grey-light topSongs"></ul>
               </div>
             </div>
+            <!-- YouTube Section -->
             <div class="tile mt-2 mr-0 is-large columns has-background-info-light is-parent ml-0 mt-5">
               <div class="tile is-child column has-background-grey-light box is-flex is-flex-direction-row youtube">
               </div>
