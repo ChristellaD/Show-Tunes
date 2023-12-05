@@ -7,36 +7,35 @@
         <title>Show Tunes</title>
       </head>
       <body>
-        <header class="is-full is-large">
+        <header class="is-full is-large has-background-grey-lighter p-5 is-relative">
           <h1 class="title is-size-1 has-text-centered">Show Tunes</h1>
         </header>
 
-        <main class="columns is-parent">
-          <aside class="column is-one-quarter is-parent box">
-            <form class="column is-child">
-              <label>Search</label>
-              <input type="text" class="field is-medium is-child" id="userInput" placeholder="Artist" />
-              <button type="submit" class="button" id="submitBtn">Submit</button>
+        <main class="columns is-ancestor ml-1 mr-1">
+          <aside class="column is-one-quarter is-parent mt-5 box">
+            <form class="column is-child has-background-grey-lighter">
+              <label class="column is-one-third is-offset-one-third title mb-1">Search</label>
+              <input type="text" class="input column is-three-fifths is-normal is-offset-one-fifth is-child mb-3" placeholder="Artist" />
+              <button type="submit" class="button submit is-one-third is-offset-one-third column has-text-white is-normal has-background-grey-light">Submit</button>
             </form>
   
-            <section class="is-child section">
+            <section class="is-child section has-background-grey-lighter mt-3">
               <h3 class="title has-text-centered is-size-3">Search History</h3>
-              <div class="history"></div>
+              <div class="history has-text-centered content"></div>
             </section>
           </aside>
-          <section class="is-three-quarters column is-offset-one-quarter is-medium tile is-child">
-            <div class="card is-child spotify">
-              <h3 class="card-header title artistName"></h3>
-              <p class="card column is-centered content overview"></p>
-              <ul class="topSongs"></ul>
+          <section class="tile is-vertical is-three-quarters column is-offset-one-quarter is-large is-child">
+            <div class="card is-child spotify has-background-info-light mt-3">
+              <h3 class="card-header has-text-centered is-justify-content-center title is-medium artistName"></h3>
+              <p class="tile column is-child has-background-grey-light topAlbums"></p>
+              <ul class="tile p-2 column has-text-centered is-child content has-background-grey-light topSongs"></ul>
             </div>
-
-          </section>
-          <section class="tile is-parent">
-            <div class="is-child is-3 is-offset-3 youtube">
+            <div class="tile is-vertical is-large column has-background-info-light is-parent">
+              <div class="tile is-child column has-background-grey-light youtube">
+              </div>
             </div>
           </section>
-
+          
         </main>
         <script
         src="https://code.jquery.com/jquery-3.5.1.min.js"
