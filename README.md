@@ -17,7 +17,7 @@ Music is a core part of life for many people, so our drive to create this applic
 * Using the Spotify API, the top three songs, top three albums, and the artist's icon are displayed.
 
 
-![Alt text](image.png)
+![Alt text](image-1.png)
 
 ## Installation 
 The final code deployed can be found at https://christellad.github.io/Show-Tunes/
